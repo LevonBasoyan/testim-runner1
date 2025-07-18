@@ -25,7 +25,13 @@ app.post("/run-testim", (req, res) => {
     if (stderr) console.error("⚠️ STDERR:\n", stderr);
     if (err) {
       console.error("❌ ERROR:", err);
-      return res.status(500).send({ error: "Testim run failed", details: stderr || err.message });
+      // Return both stdout and stderr for full context
+      return res.status(500).send({
+        error: "Testim run failed",
+        stdout,
+        stderr,
+        message: err.message
+      });
     }
     res.send({ message: "Testim run completed", output: stdout });
   });
