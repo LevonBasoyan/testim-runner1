@@ -22,8 +22,8 @@ app.post("/run-testim", (req, res) => {
   // Log environment for debugging
   console.log("ENVIRONMENT VARIABLES:", process.env);
 
-  // Use the system shell for compatibility
-  exec(command, { shell: process.env.ComSpec || 'cmd.exe' }, (err, stdout, stderr) => {
+  // Use the default shell for the current OS (no explicit shell option)
+  exec(command, (err, stdout, stderr) => {
     if (stdout) console.log("✅ STDOUT:\n", stdout);
     if (stderr) console.error("⚠️ STDERR:\n", stderr);
     if (err) {
