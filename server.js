@@ -5,7 +5,7 @@ const app = express();
 app.use(express.json());
 
 // Replace this token with the one you want to accept in Authorization header
-const AUTH_TOKEN = "Bearer PAK-E8FieCPYMsihNa-KSCOmPXINlu98mOeNPhpGpwpDNx63BuhvTku5lyz6jsQy9G4dgz7jB7wKCafN8d228";
+const AUTH_TOKEN = "Bearer PAK-E8FieCPYMsihNa-KSCOmPXlNIu98mOeNPhpGpwpDNx63BuhvTku5Iyz6jsQy9G4dgz7jB7wKCafN8d228";
 
 app.post("/run-testim", (req, res) => {
   const authHeader = req.headers.authorization;
