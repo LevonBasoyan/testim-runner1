@@ -7,7 +7,7 @@ app.use(express.json());
 const AUTH_TOKEN = "Bearer PAK-E8FieCPYMsihNa-KSCOmPXlNIu98mOeNPhpGpwpDNx63BuhvTku5Iyz6jsQy9G4dgz7jB7wKCafN8d228";
 
 // POST /run-testim endpoint to trigger a Testim test run
-app.post("/run-testim", (req, res) => {
+app.get("/run-testim", (req, res) => {
   const authHeader = req.headers.authorization;
 
   // Check for correct authorization header
