@@ -15,17 +15,21 @@ app.post("/run-testim", (req, res) => {
 
   res.send({ message: "Test started" });
 
-  const command = `./node_modules/.bin/testim --token "qhRgbWWMuLAVcKAmfH93UMt8p2elCyiyKBSGxSf83VG57SdtoP" --project "usw2RRRRFhuk6SLPxTmpc221" --testId "jI3lPRlYjOsNo4sl" --grid "Testim-Grid"`;
+const command = `npx testim --token "qhRgbWWMuLAVcKAmfH93UMt8p2elCyiyKBSGxSf83VG57SdtoP" --project "usw2RRRRFhuk6SLPxTmpc221" --testId "jI3lPRlYjOsNo4sl" --grid "Testim-Grid"`;
+
 
   exec(command, (err, stdout, stderr) => {
-    if (err) {
-      console.error("❌ ERROR:", err);
-      console.error("STDERR:", stderr);
-    } else {
-      console.log("✅ STDOUT:", stdout);
-      console.log("✅ STDERR:", stderr);
-    }
-  });
+  if (err) {
+    console.error("❌ ERROR:", err);
+  }
+  if (stdout) {
+    console.log("✅ STDOUT:", stdout);
+  }
+  if (stderr) {
+    console.error("⚠️ STDERR:", stderr);
+  }
+});
+
 });
 
 app.listen(3000, () => {
