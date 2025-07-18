@@ -15,17 +15,19 @@ app.post("/run-testim", (req, res) => {
     return res.status(401).send({ error: "Unauthorized" });
   }
 
-  // Build the Testim CLI command
-  const command = `npx @testim/testim-cli --token "qhRgbWWMuLAVcKAmfH93UMt8p2elCyiyKBSGxSf83VG57SdtoP" --project "usw2RRRRFhuk6SLPxTmpc221" --testId "jI3lPRlYjOsNo4sl" --grid "Testim-Grid" --use-local-chrome-driver`;
+  // Use the full path to the Testim CLI for reliability
+  const testimPath = `${process.cwd()}${require('path').sep}node_modules${require('path').sep}.bin${require('path').sep}testim`;
+  const command = `"${testimPath}" --token "qhRgbWWMuLAVcKAmfH93UMt8p2elCyiyKBSGxSf83VG57SdtoP" --project "usw2RRRRFhuk6SLPxTmpc221" --testId "jI3lPRlYjOsNo4sl" --grid "Testim-Grid" --use-local-chrome-driver`;
 
-  // Start the test run and respond only after completion
-  exec(command, (err, stdout, stderr) => {
-    // Log all output for debugging
+  // Log environment for debugging
+  console.log("ENVIRONMENT VARIABLES:", process.env);
+
+  // Use the system shell for compatibility
+  exec(command, { shell: process.env.ComSpec || 'cmd.exe' }, (err, stdout, stderr) => {
     if (stdout) console.log("✅ STDOUT:\n", stdout);
     if (stderr) console.error("⚠️ STDERR:\n", stderr);
     if (err) {
       console.error("❌ ERROR:", err);
-      // Return both stdout and stderr for full context
       return res.status(500).send({
         error: "Testim run failed",
         stdout,
