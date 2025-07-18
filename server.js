@@ -17,7 +17,7 @@ app.post("/run-testim", (req, res) => {
 
   // Use the full path to the Testim CLI for reliability
   const testimPath = `${process.cwd()}${require('path').sep}node_modules${require('path').sep}.bin${require('path').sep}testim`;
-  const command = `"${testimPath}" --token "qhRgbWWMuLAVcKAmfH93UMt8p2elCyiyKBSGxSf83VG57SdtoP" --project "usw2RRRRFhuk6SLPxTmpc221" --testId "jI3lPRlYjOsNo4sl" --grid "Testim-Grid" --use-local-chrome-driver`;
+  const command = `${testimPath} --token "qhRgbWWMuLAVcKAmfH93UMt8p2elCyiyKBSGxSf83VG57SdtoP" --project "usw2RRRRFhuk6SLPxTmpc221" --testId "jI3lPRlYjOsNo4sl" --grid "Testim-Grid" --use-local-chrome-driver`;
 
   // Log environment for debugging
   console.log("ENVIRONMENT VARIABLES:", process.env);
@@ -39,8 +39,9 @@ app.post("/run-testim", (req, res) => {
   });
 });
 
-app.listen(3000, () => {
-  console.log("🚀 Server ready");
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`🚀 Server ready on port ${PORT}`);
 });
 
 
