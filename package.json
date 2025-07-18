@@ -6,7 +6,10 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "express": "^5.1.0",
-    "@testim/testim-cli": "^3.6.1"
-  }
+    "@testim/testim-cli": "^4.157.0",
+    "express": "^5.1.0"
+  },
+  "repository": "https://github.com/LevonBasoyan/testim-runner1.git",
+  "author": "git.ttsoft <git.ttsoft@gmail.com>",
+  "license": "MIT"
 }
