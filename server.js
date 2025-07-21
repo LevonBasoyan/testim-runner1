@@ -7,7 +7,7 @@ const app = express();
 app.use(express.json());
 
 // Replace with your actual token
-const AUTH_TOKEN = 'Bearer PAK-E8FieCPY…';
+const AUTH_TOKEN = 'Bearer PAK-E8FieCPYMsihNa-KSCOmPXlNIu98mOeNPhpGpwpDNx63BuhvTku5Iyz6jsQy9G4dgz7jB7wKCafN8d228';
 
 app.get('/run-testim', (req, res) => {
   if (req.headers.authorization !== AUTH_TOKEN) {
@@ -21,7 +21,7 @@ app.get('/run-testim', (req, res) => {
   const testimPath = path.join(__dirname, 'node_modules', '.bin', 'testim');
 
   // Compose command to run testim
-  const command = `${testimPath} --token "qhRgbW…" --project "usw2RRRR…" --testId "jI3lPRlYjOsNo4sl" --grid "Testim-Grid"`;
+  const command = `${testimPath} --token "qhRgbWWMuLAVcKAmfH93UMt8p2elCyiyKBSGxSf83VG57SdtoP" --project "usw2RRRRFhuk6SLPxTmpc221" --testId "k2xfbd8hs5MMV45F" --grid "Testim-Grid"`;
 
   // Run command
   exec(command, (err, stdout, stderr) => {
