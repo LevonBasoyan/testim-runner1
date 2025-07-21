@@ -10,10 +10,12 @@ app.use(express.json());
 // Replace with your actual token
 const AUTH_TOKEN = 'Bearer PAK-E8FieCPYMsihNa-KSCOmPXlNIu98mOeNPhpGpwpDNx63BuhvTku5Iyz6jsQy9G4dgz7jB7wKCafN8d228';
 
-// Health check route for Railway
-app.get('/', (req, res) => {
-  res.status(200).send('OK');
+// Health check route for Railway - with delay to test container stability
+app.get('/', async (req, res) => {
+  await new Promise(resolve => setTimeout(resolve, 10000)); // 10s delay
+  res.status(200).send('Still alive');
 });
+
 
 app.get('/run-testim', (req, res) => {
   if (req.headers.authorization !== AUTH_TOKEN) {
