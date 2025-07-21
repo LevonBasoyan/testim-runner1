@@ -1,0 +1,5 @@
+[install]
+cmds = ["npm ci --omit=optional --omit=dev"]
+
+[start]
+cmd = "node server.js"
