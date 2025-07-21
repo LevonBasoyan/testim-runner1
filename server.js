@@ -8,7 +8,7 @@ npx testim \
   --use-local-chrome-driver
 
 
-  const command = `npx testim --token "qhRgbWWMuLAVcKAmfH93UMt8p2elCyiyKBSGxSf83VG57SdtoP" --project "usw2RRRRFhuk6SLPxTmpc221" --testId "jI3lPRlYjOsNo4sl" --grid "Testim-Grid" --use-local-chrome-driver`;
+  const command = `npx testim --token "qhRgbWWMuLAVcKAmfH93UMt8p2elCyiyKBSGxSf83VG57SdtoP" --project "usw2RRRRFhuk6SLPxTmpc221" --testId "k2xfbd8hs5MMV45F" --grid "Testim-Grid"`;
 
   exec(command, (err, stdout, stderr) => {
   if (err) {
