@@ -1,8 +1,9 @@
 FROM node:18
 
+# Set working directory
 WORKDIR /usr/src/app
 
-# Install Chromium and dependencies
+# Install Chromium and required dependencies
 RUN apt-get update && apt-get install -y \
     chromium-browser \
     fonts-liberation \
@@ -21,21 +22,25 @@ RUN apt-get update && apt-get install -y \
     --no-install-recommends && \
     rm -rf /var/lib/apt/lists/*
 
-# Set Puppeteer to use Chromium
+# Set Puppeteer executable path for Chromium
 ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
 
-# Copy and install dependencies
+# Copy package files and install production dependencies
 COPY package*.json ./
 RUN npm install --omit=optional --omit=dev
 
-# Copy rest of the app
+# Copy the rest of the application files
 COPY . .
 
-# ✅ Fix permission on the testim binary
+# ✅ Ensure testim binary is executable
 RUN chmod +x node_modules/.bin/testim
 
-# Expose the app port
+# Railway expects a healthcheck route
+HEALTHCHECK --interval=10s --timeout=3s --start-period=5s --retries=3 \
+  CMD curl -f http://localhost:8080 || exit 1
+
+# Expose app port
 EXPOSE 8080
 
-# Start server
+# Start the app
 CMD ["node", "server.js"]
