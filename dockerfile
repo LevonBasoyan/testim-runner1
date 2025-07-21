@@ -31,11 +31,15 @@ COPY package*.json ./
 # 🔧 Use npm install (not ci) to avoid platform errors
 RUN npm install --omit=optional --omit=dev
 
-# ✅ Make Testim CLI executable
-RUN chmod +x ./node_modules/.bin/testim
+# Fix permissions explicitly for testim
+RUN chmod 755 node_modules/.bin/testim
 
 # Copy rest of the app
 COPY . .
+
+
+# Set the entrypoint manually (forces shell to use bash)
+SHELL ["/bin/bash", "-c"]
 
 # Expose port
 EXPOSE 8080
