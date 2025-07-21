@@ -37,7 +37,7 @@ app.get('/run-testim', (req, res) => {
     '--token', 'qhRgbWWMuLAVcKAmfH93UMt8p2elCyiyKBSGxSf83VG57SdtoP',
     '--project', 'usw2RRRRFhuk6SLPxTmpc221',
     // '--testId', '96EJRqkb6s9GlHNH',
-    '--suiteid','CtXB0h1fgxH1sYKY',
+    '--suite','Quiz Flow Suite Library',
     '--grid', 'Testim-Grid'
   ];
 
