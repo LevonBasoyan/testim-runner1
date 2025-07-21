@@ -9,7 +9,7 @@ app.use(express.json());
 // Replace with your actual token
 const AUTH_TOKEN = 'Bearer PAK-E8FieCPYMsihNa-KSCOmPXlNIu98mOeNPhpGpwpDNx63BuhvTku5Iyz6jsQy9G4dgz7jB7wKCafN8d228';
 
-app.get('/run-testim', (req, res) => {
+app.post('/run-testim', (req, res) => {
   if (req.headers.authorization !== AUTH_TOKEN) {
     return res.status(401).json({ error: 'Unauthorized' });
   }
