@@ -9,7 +9,6 @@ const AUTH_TOKEN = "Bearer PAK-E8FieCPYMsihNa-KSCOmPXlNIu98mOeNPhpGpwpDNx63BuhvT
 // POST /run-testim endpoint to trigger a Testim test run
 app.get("/run-testim", (req, res) => {
   const authHeader = req.headers.authorization;
-  console.log("Received Authorization Header:", authHeader);
 
   // Check for correct authorization header
   if (authHeader !== AUTH_TOKEN) {

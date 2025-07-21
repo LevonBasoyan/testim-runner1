@@ -27,7 +27,8 @@ ENV CHROME_PATH=/usr/bin/chromium
 
 # Copy package files and install only production dependencies
 COPY package.json package-lock.json* ./
-RUN npm install --omit=dev
+# Install prod deps only, skipping optional platform-specific binaries
+RUN npm ci --omit=optional --omit=dev
 
 # Copy the rest of the app
 COPY . .
