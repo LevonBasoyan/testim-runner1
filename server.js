@@ -1,47 +1,41 @@
-const express = require("express");
-const { exec } = require("child_process");
+res.send({ message: "Test started" });
 
-const app = express();
-app.use(express.json());
+npx testim \
+  --token "qhRgbWWMuLAVcKAmfH93UMt8p2elCyiyKBSGxSf83VG57SdtoP" \
+  --project "usw2RRRRFhuk6SLPxTmpc221" \
+  --testId "jI3lPRlYjOsNo4sl" \
+  --grid "Testim-Grid" \
+  --use-local-chrome-driver
 
-const AUTH_TOKEN = "Bearer PAK-E8FieCPYMsihNa-KSCOmPXlNIu98mOeNPhpGpwpDNx63BuhvTku5Iyz6jsQy9G4dgz7jB7wKCafN8d228";
 
-// POST /run-testim endpoint to trigger a Testim test run
-app.get("/run-testim", (req, res) => {
-  const authHeader = req.headers.authorization;
+  const command = `npx testim --token "qhRgbWWMuLAVcKAmfH93UMt8p2elCyiyKBSGxSf83VG57SdtoP" --project "usw2RRRRFhuk6SLPxTmpc221" --testId "jI3lPRlYjOsNo4sl" --grid "Testim-Grid" --use-local-chrome-driver`;
 
-  // Check for correct authorization header
-  if (authHeader !== AUTH_TOKEN) {
-    return res.status(401).send({ error: "Unauthorized" });
-  }
-
-  // Use the full path to the Testim CLI for reliability
-  const testimPath = `${process.cwd()}${require('path').sep}node_modules${require('path').sep}.bin${require('path').sep}testim`;
-  const command = `${testimPath} --token "qhRgbWWMuLAVcKAmfH93UMt8p2elCyiyKBSGxSf83VG57SdtoP" --project "usw2RRRRFhuk6SLPxTmpc221" --testId "jI3lPRlYjOsNo4sl" --grid "Testim-Grid" --use-local-chrome-driver`;
-
-  // Log environment for debugging
-  console.log("ENVIRONMENT VARIABLES:", process.env);
-
-  // Use the default shell for the current OS (no explicit shell option)
   exec(command, (err, stdout, stderr) => {
-    if (stdout) console.log("✅ STDOUT:\n", stdout);
-    if (stderr) console.error("⚠️ STDERR:\n", stderr);
+  if (err) {
+    console.error("❌ ERROR:", err);
+  }
+  if (stdout) {
+    console.log("✅ STDOUT:", stdout);
+  }
+  if (stderr) {
+    console.error("⚠️ STDERR:", stderr);
+  }
+});
+
     if (err) {
       console.error("❌ ERROR:", err);
-      return res.status(500).send({
-        error: "Testim run failed",
-        stdout,
-        stderr,
-        message: err.message
-      });
     }
-    res.send({ message: "Testim run completed", output: stdout });
+    if (stdout) {
+      console.log("✅ STDOUT:", stdout);
+    }
+    if (stderr) {
+      console.error("⚠️ STDERR:", stderr);
+    }
   });
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`🚀 Server ready on port ${PORT}`);
+app.listen(3000, () => {
+  console.log("🚀 Server ready");
 });
 
-
+~
