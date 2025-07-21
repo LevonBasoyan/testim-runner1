@@ -9,6 +9,9 @@
     "@testim/testim-cli": "^4.157.0",
     "express": "^5.1.0"
   },
+  "engines": {
+    "node": ">=18"
+  },
   "repository": "https://github.com/LevonBasoyan/testim-runner1.git",
   "author": "git.ttsoft <git.ttsoft@gmail.com>",
   "license": "MIT"

@@ -4,9 +4,9 @@ FROM node:18
 # Set working directory
 WORKDIR /usr/src/app
 
-# Install Chromium and necessary libraries
+# Install Chromium and required libraries
 RUN apt-get update && apt-get install -y \
-    chromium \
+    chromium-browser \
     fonts-liberation \
     libappindicator3-1 \
     libasound2 \
@@ -22,19 +22,20 @@ RUN apt-get update && apt-get install -y \
     --no-install-recommends && \
     rm -rf /var/lib/apt/lists/*
 
-# Set Chromium path for tools like Testim
-ENV CHROME_PATH=/usr/bin/chromium
+# Set Chromium path for Testim CLI
+ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
 
-# Copy package files and install only production dependencies
-COPY package.json package-lock.json* ./
-# Install prod deps only, skipping optional platform-specific binaries
-RUN npm ci --omit=optional --omit=dev
+# Copy package files and install dependencies
+COPY package*.json ./
 
-# Copy the rest of the app
+# 🔧 Use npm install (not ci) to avoid platform errors
+RUN npm install --omit=optional --omit=dev
+
+# Copy rest of the app
 COPY . .
 
-# Expose app port
+# Expose port
 EXPOSE 3000
 
-# Start your server
+# Start the server
 CMD ["node", "server.js"]
