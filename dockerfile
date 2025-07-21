@@ -31,6 +31,9 @@ COPY package*.json ./
 # 🔧 Use npm install (not ci) to avoid platform errors
 RUN npm install --omit=optional --omit=dev
 
+# ✅ Make Testim CLI executable
+RUN chmod +x ./node_modules/.bin/testim
+
 # Copy rest of the app
 COPY . .
 
