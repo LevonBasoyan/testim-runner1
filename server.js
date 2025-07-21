@@ -1,41 +1,30 @@
-res.send({ message: "Test started" });
+// server.js
+const express = require('express');
+const { exec } = require('child_process');
+const path = require('path');
 
-npx testim \
-  --token "qhRgbWWMuLAVcKAmfH93UMt8p2elCyiyKBSGxSf83VG57SdtoP" \
-  --project "usw2RRRRFhuk6SLPxTmpc221" \
-  --testId "jI3lPRlYjOsNo4sl" \
-  --grid "Testim-Grid" \
-  --use-local-chrome-driver
+const app = express();
+app.use(express.json());
 
+const AUTH_TOKEN = 'Bearer PAK-E8FieCPY…';  // same token you used before
 
-  const command = `npx testim --token "qhRgbWWMuLAVcKAmfH93UMt8p2elCyiyKBSGxSf83VG57SdtoP" --project "usw2RRRRFhuk6SLPxTmpc221" --testId "k2xfbd8hs5MMV45F" --grid "Testim-Grid"`;
+app.get('/run-testim', (req, res) => {
+  if (req.headers.authorization !== AUTH_TOKEN) {
+    return res.status(401).json({ error: 'Unauthorized' });
+  }
+
+  res.status(202).json({ message: 'Test triggered' }); // reply fast
+
+  // build CLI command
+  const testim = `${path.join(process.cwd(), 'node_modules', '.bin', 'testim')}`;
+  const command = `${testim} --token "qhRgbW…" --project "usw2RRRR…" --testId "jI3lPRlYjOsNo4sl" --grid "Testim-Grid"`;
 
   exec(command, (err, stdout, stderr) => {
-  if (err) {
-    console.error("❌ ERROR:", err);
-  }
-  if (stdout) {
-    console.log("✅ STDOUT:", stdout);
-  }
-  if (stderr) {
-    console.error("⚠️ STDERR:", stderr);
-  }
-});
-
-    if (err) {
-      console.error("❌ ERROR:", err);
-    }
-    if (stdout) {
-      console.log("✅ STDOUT:", stdout);
-    }
-    if (stderr) {
-      console.error("⚠️ STDERR:", stderr);
-    }
+    if (err) console.error('❌ ERROR:', err);
+    if (stdout) console.log('✅ STDOUT:', stdout);
+    if (stderr) console.error('⚠️ STDERR:', stderr);
   });
 });
 
-app.listen(3000, () => {
-  console.log("🚀 Server ready");
-});
-
-~
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`🚀 Server ready on ${PORT}`));
