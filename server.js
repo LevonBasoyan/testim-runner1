@@ -36,9 +36,7 @@ app.get('/run-testim', (req, res) => {
   const args = [
     '--token', 'qhRgbWWMuLAVcKAmfH93UMt8p2elCyiyKBSGxSf83VG57SdtoP',
     '--project', 'usw2RRRRFhuk6SLPxTmpc221',
-    '--testId', 'EOxPOQRxjiDWd4Xr',
-    '--testId', 'jI3lPRlYjOsNo4sl',
-    '--testId', 'EDZhF30m4gu6cgll',
+    '--testId', 'kivgldwd7QNtjVf4',
     '--grid', 'Testim-Grid'
   ];
 
